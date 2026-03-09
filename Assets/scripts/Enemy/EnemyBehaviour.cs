@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    [SerializeField] enemyData basicEnemyData;
     [SerializeField] private GameObject player;
-    [SerializeField] private float moveSpeed = 3f;
 
     private Rigidbody2D rb;
+    private float currentHealth;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         EnemySpawner.enemyActiveCounter++;
         player = GameObject.FindGameObjectWithTag("Player");
+        currentHealth = basicEnemyData.LifePoints;
     }
 
     private void OnDisable()
@@ -25,12 +27,25 @@ public class EnemyBehaviour : MonoBehaviour
 
     }
 
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    private void Die()
+    {
+        gameObject.SetActive(false);
+    }
 
     private void FixedUpdate()
     {
         if (player == null) return;
 
         Vector2 direction = ((Vector2)player.transform.position - rb.position).normalized;
-        rb.linearVelocity = direction * moveSpeed;
+        rb.linearVelocity = direction * basicEnemyData.Speed;
     }
 }

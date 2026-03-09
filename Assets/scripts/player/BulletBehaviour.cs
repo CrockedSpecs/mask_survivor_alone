@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
-    [SerializeField] private int bulletSpeed ;
+    [SerializeField] private int bulletSpeed;
     [SerializeField] bulletData bulletData;
     private Rigidbody2D rb;
 
@@ -32,6 +32,13 @@ public class BulletBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        EnemyBehaviour enemy = collision.gameObject.GetComponent<EnemyBehaviour>();
+
+        if (enemy != null)
+        {
+            enemy.TakeDamage(bulletData.Damage);
+        }
+
         DestroyBullet();
     }
 

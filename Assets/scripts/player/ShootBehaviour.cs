@@ -50,9 +50,7 @@ public class ShootBehaviour : MonoBehaviour
         if (bulletGO == null) return;
         BulletBehaviour bullet = bulletGO.GetComponent<BulletBehaviour>();
 
-
         bullet.transform.position = transform.position;
-
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(
             new Vector3(mouseScreenPos.x, mouseScreenPos.y, -Camera.main.transform.position.z)
@@ -63,10 +61,9 @@ public class ShootBehaviour : MonoBehaviour
         bulletGO.SetActive(true);
         bulletGO.GetComponent<BulletBehaviour>().SetDirection(direction);
 
-
         shootTimer = 0f;
         ammo--;
- 
+
     }
 
     private void Reload()

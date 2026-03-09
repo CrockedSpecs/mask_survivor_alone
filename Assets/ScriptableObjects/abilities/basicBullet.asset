@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: basicBullet
   m_EditorClassIdentifier: Assembly-CSharp::bulletData
   bulletName: basic Bullet
-  damage: 14
+  damage: 8
   speed: 10
   doBounce: 0
   isFireDamage: 0
